@@ -1,4 +1,5 @@
 comfyui:
+    # Esta ruta es CRÍTICA para que funcione en Serverless
     base_path: /runpod-volume/runpod-slim/ComfyUI
     is_default: true
     checkpoints: models/checkpoints
@@ -10,4 +11,10 @@ comfyui:
     loras: models/loras
     upscale_models: models/upscale_models
     vae: models/vae
+    
+    # --- ESTAS SON LAS QUE FALTABAN ---
+    unet: models/unet
+    diffusion_models: models/unet
+    # ----------------------------------
+
     custom_nodes: custom_nodes
