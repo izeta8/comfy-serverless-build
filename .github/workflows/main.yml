@@ -9,6 +9,19 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      # 1. PASO NUEVO: LIBERAR ESPACIO EN DISCO (CRÍTICO)
+      - name: Free Disk Space (Ubuntu)
+        uses: jlumbroso/free-disk-space@main
+        with:
+          # Borramos cosas que no necesitamos para ganar ~30GB
+          tool-cache: true
+          android: true
+          dotnet: true
+          haskell: true
+          large-packages: true
+          docker-images: true
+          swap-storage: true
+
       - name: Checkout code
         uses: actions/checkout@v4
 
@@ -27,6 +40,5 @@ jobs:
           context: .
           push: true
           tags: izeta8/comfy-hibrido:v1
-          # Esto acelera futuras builds
-          cache-from: type=registry,ref=izeta8/comfy-hibrido:cache
-          cache-to: type=registry,ref=izeta8/comfy-hibrido:cache,mode=max
+          # Desactivamos caché local para ahorrar espacio en este paso
+          no-cache: true
