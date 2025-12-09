@@ -1,6 +1,9 @@
 comfyui:
+    # Ruta base en el Serverless
     base_path: /runpod-volume/runpod-slim/ComfyUI
     is_default: true
+    
+    # --- Carpetas Estándar ---
     checkpoints: models/checkpoints
     clip: models/clip
     clip_vision: models/clip_vision
@@ -11,9 +14,25 @@ comfyui:
     upscale_models: models/upscale_models
     vae: models/vae
     
-    # --- CAMBIO CRÍTICO AQUI ---
+    # --- Lo que arreglamos antes ---
     unet: models/diffusion_models
     diffusion_models: models/diffusion_models
-    # ---------------------------
+
+    # --- LO NUEVO PARA ARREGLAR TU ERROR ACTUAL ---
+    
+    # 1. Para LoadImage (Node 20)
+    input: input
+    output: output
+    
+    # 2. Para ReActor / FaceSwap (Node 19)
+    insightface: models/insightface
+    
+    # 3. Para Impact Pack / FaceDetailer (Nodes 22, 23)
+    # Nota: A veces se llaman 'bbox' o 'sams', pongo todas las variantes por seguridad
+    ultralytics: models/ultralytics
+    bbox: models/ultralytics/bbox
+    sams: models/sams
+    
+    # ----------------------------------------------
 
     custom_nodes: custom_nodes
