@@ -7,11 +7,10 @@ RUN apt-get update && apt-get install -y \
     libglib2.0-0 \
     && rm -rf /var/lib/apt/lists/*
 
-# 3. Instalamos las librerías de Python para tus Nodos Custom
-# HE AÑADIDO: dynamicprompts, dill, ultralytics (que faltaban en los logs)
-RUN pip install insightface onnxruntime-gpu segment-anything ultralytics piexif numba dynamicprompts dill
+# 3. Instalamos librerías de Python (CORREGIDO CON VERSIONES FIJAS)
+# insightface==0.7.3 es OBLIGATORIO para que ReActor no falle.
+# onnxruntime-gpu maneja la aceleración.
+RUN pip install insightface==0.7.3 onnxruntime-gpu segment-anything ultralytics piexif numba dynamicprompts dill
 
-# 4. Copiamos tu mapa de rutas al contenedor
+# 4. Copiamos tu mapa de rutas
 COPY extra_model_paths.yaml /comfyui/extra_model_paths.yaml
-
-# Listo
